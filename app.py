@@ -84,20 +84,30 @@ r2_2010s = compute_r2_by_era(2010, 2019)
 # PAGE RENDER FUNCTIONS
 
 def render_home():
-    st.title("Sound in the Streaming Era: What Spotify Data Reveals About Musical Popularity")
-    st.image("images/spotify_logo.jpg", use_container_width=True)
     st.subheader(
         """
         This website showcases an analysis of the sonic features of popular songs on Spotify from 2000-2019, providing an interactive exploration of popular music in the streaming era using Spotify data.
         """
     )
+    st.image("images/spotify_logo.jpg", use_container_width=True)
+
+    st.markdown(
+        """
+        On the rest of the site, you can:
+
+        - Explore **correlations** between audio features and Spotify popularity  
+        - Track **sonic feature trends** over time
+        - Compare how sonic features change **by genre**  
+        - See **regression results** that test whether a simple “hit formula”
+        exists in the audio data
+        """
+    )
 
     st.markdown("---")
 
-
 def render_background():
     st.header("Background")
-    st.image("images/streaming.webp", width=700)
+    st.image("images/streaming.webp")
 
     st.subheader("The Streaming Era")
     st.markdown(
@@ -152,50 +162,84 @@ def render_background():
 
     st.markdown("---")
 
-    col1, col2, col3 = st.columns(3)
+    st.subheader("Spotify and the Streaming Era")
+    st.image("images/spotify_banner.jpg")
 
-    with col1:
-        st.subheader("Research Questions")
-        st.markdown(
-            """
-            - Which musical characteristics (danceability, energy, valence, etc.) are
-              most associated with Spotify popularity?  
-            - How have these features changed across two decades of digital music (2000–2019)?  
-            - How do trends vary across genres such as pop, hip hop, rock,
-              Dance/Electronic, and Latin?
-            """
-        )
 
-    with col2:
-        st.subheader("Significance")
-        st.markdown(
-            """
-            Streaming platforms and algorithms now shape how we encounter music:
-            through **playlists, recommendations, and mood categories**.
-            Instead of taking “popular music” for granted, this project asks:
+    col3, col4 = st.columns([2, 3])
 
-            - Are we choosing what we listen to, or are platforms choosing for us?  
-            - Has the sound of popular music adjusted to fit **platform logics** like
-              skippability, replayability, and background listening?
-            """
-        )
-    
     with col3:
-        st.subheader("What This Project Does")
-
+        st.subheader("Spotify at a Glance")
         st.markdown(
             """
-            On the rest of the site, you can:
+            - Swedish audio streaming service founded in 2006, launched in 2008  
+            - Freemium model: free, ad-supported tier + paid Premium subscription  
+            - Catalog of **100M+ tracks** plus podcasts and audiobooks  
+            - Available in **180+ markets** around the world  
+            - Over **700 million monthly active users**, with hundreds of millions of paying subscribers  
 
-            - Explore **correlations** between audio features and Spotify popularity  
-            - Track **feature trends** over time (danceability, energy, valence,
-            loudness, duration)  
-            - Compare how those features change **by genre**  
-            - See **regression results** that test whether a simple “hit formula”
-            exists in the audio data
+            Spotify is not just “one app” – it is a global infrastructure for how people
+            discover, organize, and return to music.
             """
         )
 
+    with col4:
+        st.subheader("How Spotify Structures Listening")
+        st.markdown(
+            """
+            - Curated and algorithmic playlists (e.g., Discover Weekly, Release Radar,
+              mood/genre playlists)  
+            - Personalized ranking of tracks inside playlists and albums  
+            - “Skip–replay” dynamics: short attention spans, fast hooks, and replayable
+              songs tend to perform well  
+            - Social features like sharing, collaborative playlists, and annual Wrapped
+              summaries that frame listening as data
+
+            These design choices create subtle incentives for songs to be:
+            - **Loud, energetic, and immediately engaging**  
+            - **Shorter**, with hooks appearing earlier  
+            - **Rhythm- and groove-focused**, fitting into background or multi-task listening  
+            """
+        )
+
+    st.subheader("Why Spotify?")
+    st.markdown(
+        """
+        This project uses Spotify data because:
+
+        - Spotify is currently the **largest global music streaming platform**, so its
+          popularity score reflects how songs circulate in the dominant listening environment.  
+        - Its audio features provide a standardized way to describe the **sound** of tracks at scale.  
+        - By looking at tracks from **2000–2019**, we can trace how popular music evolves
+          through the **transition from downloads to full streaming dominance**.  
+        """
+    )
+
+    st.markdown("---")
+
+    st.subheader("Research Questions")
+    st.image("images/question.jpg")
+
+    st.markdown(
+        """
+        - Which musical characteristics such as danceability, energy, or valence are most associated with Spotify popularity?
+        - How have these features changed across the two decades spanning 2000-2019 of digital music?  
+        - How do trends vary across genres such as pop, hip hop, rock, Dance/Electronic, and Latin?
+        """
+    )
+
+    st.subheader("Significance")
+    st.markdown(
+        """
+        Streaming platforms and algorithms now shape how we encounter music:
+        through **playlists, recommendations, and mood categories**.
+        This project asks:
+
+        - Are we choosing what we listen to, or are platforms choosing for us through algorithms or curated playlists?  
+        - Has the sound of popular music adjusted to fit **platform logics** like
+            skippability, replayability, and background listening?
+        """
+    )
 
 def render_data_methods():
     st.header("Data & Methods")
@@ -231,22 +275,30 @@ def render_data_methods():
 
 
     st.subheader("Methods")
+    st.image("images/calculations.jpg", width=300)
     
-    hero_col1, hero_col2 = st.columns([1.0, 2.7])
+    st.markdown("""
+                As features like danceability, loudness, acousticness, and energy were captured by the data, I thought it would be interesting to identify if there are any relationships between these attributes and the popularity of the song. 
+                The dataset also included genre, and I was also interested in how these elements differ across genres. As the dataset encompasses popular tracks on Spotify over the nearly two decades, I believed I could gain insights not only on 
+                musical shifts and trend evolutions over that period, but also evaluate deeper changes such as the emergence of streaming as opposed to physical music forms or the effect of short media on attention spans and song duration.""")
+    
+    st.markdown(
+        """
+        Statistical Methods:
+        - Descriptive statistics and feature trends over time (2000–2019)  
+        - Genre-level comparisons of key audio features  
+        - Correlation analysis between features and popularity  
+        - Linear regression models to test whether audio features can
+        **predict popularity**  
+        - Tools: Python (`pandas`, `seaborn`, `matplotlib`, `scikit-learn`)
+        """
+    )
 
-    with hero_col1:
-        st.image("images/calculations.jpg", width=300)
-    with hero_col2:
-        st.markdown(
-            """
-            - Descriptive statistics and feature trends over time (2000–2019)  
-            - Genre-level comparisons of key audio features  
-            - Correlation analysis between features and popularity  
-            - Linear regression models to test whether audio features can
-            **predict popularity**  
-            - Tools: Python (`pandas`, `seaborn`, `matplotlib`, `scikit-learn`)
-            """
-        )
+    st.markdown("""I chose to use Python as the programming language for this project because it is the standard programming language for data analysis in both data science and the digital humanities space.
+                It has accessible syntax, strong community support, and also has many libraries specifically designed for working with heavy data and visualizations, both extremely relevant to my work.
+                The Pandas library was useful for preprocessing, cleaning, and reshaping the data for visualizations. I used the Seaborn and Matplotlib libraries to build informative statistical graphics that could be clear and easily understandable.
+                The Scikit-Learn library was used to perform the linear regression algorithm for sonic feature and popularity prediction.""")
+
 
 def render_sonic_features():
     st.header("Sonic Features & Popularity")
@@ -293,7 +345,66 @@ def render_sonic_features():
         """
     )
 
-    st.subheader("Key Takeaways:")
+    st.header("Can Audio Features Predict Spotify Popularity?")
+    st.image("images/prediction.png")
+
+    st.markdown(
+        """
+        To test if a song’s audio features can predict its popularity, I built a linear regression model using the sonic features as predictors. 
+        I wanted to determine whether measurable musical traits had a statistically significant relationship with a son’s popularity on Spotify. 
+        I chose to use linear regression because it would allow me to clearly view and interpret how each audio feature affects Spotify popularity 
+        and I could also quantify the direction and strength of these relationships. 
+        - I chose the fields Danceability, Energy, Loudness, Tempo, Valence, Speechiness, Acousticness, Instrumentalness, and Liveness for the regression 
+        because they are numeric and could influence listening behavior. The response variable was the Spotify popularity score. 
+        - I split the data into training and testing sets and fit a multiple linear regression model using the features. I evaluated the performance of the model 
+        by using R2, which measures how much variance in popularity was explained, and the mean squared error to measure the model’s prediction accuracy on new data.
+        """
+    )
+
+    st.markdown(
+        """
+        <div style="text-align: center;">
+            <p style="font-size: 20px;"><b>R² (Overall)</b></p>
+            <h1>0.0101</h1>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+    st.markdown(
+        """
+        The overall R2 value was 0.0101, meaning that only approximately 1% of the variation in Spotify popularity is explained by the audio features. This means that the relationship between 
+        audio features and Spotify popularity is very weak and sound alone isn’t enough to strongly predict hit songs.
+
+        Next, I split the data into two time periods by decade: 2000-2009 and 2010-2019, and ran separate regression models for each period to see whether this relationship changed over time, 
+        especially as the music industry undergoes the transition into what we know today as the modern streaming era.
+        """
+    )
+
+    c1, c2 = st.columns(2)
+    with c1:
+        st.markdown("""R² (2000–2009)""")
+        st.header("0.028")
+    with c2:
+        st.markdown("""R² (2010–2019)""")
+        st.header("0.005")
+    
+    st.markdown(
+        """
+        The decade 2000-2009 had an R2 value of 0.0277 and 2010-2019 had an R2 value of 0.0046. This means that during the early digital era, audio features explained approximately 2.8% of popularity, 
+        and in the modern streaming era, audio features now explain less than 0.5% of popularity variation. These results indicate that popularity is driven more by platform dynamics than sound alone. 
+        These results made sense because viral trends like short video dances, social media platforms like TikTok, and playlist and recommendation algorithms strongly influence a song’s exposure.
+        Therefore, songs with vastly different audio features can achieve similar popularity scores. The drop in the R2 value in the 2010-2019 decade, however, does mean that audio features became less
+        predictive of success in comparison to the 2000-2009 decade.
+        """
+    )
+    st.markdown("---")
+
+
+    st.header("Key Takeaways")
+    st.image("images/lightbulb.jpg", width = 600)
+
     st.markdown(
         """
         - All correlations with popularity are **very small** (close to zero).  
@@ -303,43 +414,17 @@ def render_sonic_features():
           (instrumental tracks tend to be a bit less popular).  
         - No individual feature strongly determines popularity – there is
           **no simple acoustic recipe** for a hit in this dataset.
-        """
-    )
 
-    
-
-    st.header("Can Audio Features Predict Spotify Popularity?")
-
-    st.markdown(
-        """
-        To test for a measurable “hit formula,” I fit linear regression models that
-        predict Spotify popularity from nine audio features, run separately for:
-        **2000–2009** and **2010–2019**.
-        """
-    )
-
-    c1, c2 = st.columns(2)
-    with c1:
-        st.metric("R² (2000–2009)", f"{r2_2000s:.3f}")
-    with c2:
-        st.metric("R² (2010–2019)", f"{r2_2010s:.3f}")
-
-    st.markdown(
-        """
-        **Interpretation of the numbers:**
-
-        - Both R² values are **very low**, meaning the models explain only a tiny fraction
-          of the variation in popularity.  
-        - The regression itself is working; the low R² tells us that **popularity is not
-          strongly determined by these audio features**.  
-        - Even though songs are clearly becoming more danceable, energetic, loud, and short,
-          those characteristics do **not** reliably predict which songs are more popular
-          on Spotify.
+        The multiple linear regression model revealed that Energy, Danceability, and Loudness were positively associated with popularity, suggesting that songs high in energy and rhythm tend to perform better on Spotify. 
+        However, the overall R2 value of 0.0101 indicated that audio features alone only explain a part of what makes a song popular. 
         """
     )
 
 def render_genre_shift():
     st.header("Genre Shifts: Do All Styles Change the Same Way?")
+
+    st.subheader("Barplot of Genres")
+    st.image("images/genres_barplot.png")
 
     st.markdown(
         """
@@ -398,7 +483,7 @@ def render_feature_trend():
 
     st.markdown(
         """
-        Here we track how the *average* sound of popular music changed between
+        Here I track how the *average* sound of popular music changed between
         2000–2019 across all genres.
         """
     )
@@ -414,9 +499,11 @@ def render_feature_trend():
         ax.set_xlabel("Year")
         ax.grid(alpha=0.3)
         st.pyplot(fig)
-        st.caption(
-            "Danceability dips in the mid-2000s, then rises sharply in the mid-2010s, "
-            "aligning with playlist and short-form video cultures that favor rhythm-forward tracks."
+        st.markdown(
+            """
+            Danceability dips in the mid-2000s, then rises sharply in the mid-2010s,
+            "aligning with playlist and short-form video cultures that favor rhythm-forward tracks.
+            """
         )
 
     # Energy
@@ -428,9 +515,11 @@ def render_feature_trend():
         ax.set_xlabel("Year")
         ax.grid(alpha=0.3)
         st.pyplot(fig)
-        st.caption(
-            "Energy jumps early in the period and stays high – loud, intense production "
-            "becomes a cross-genre norm."
+        st.markdown(
+            """
+            Energy jumps early in the period and stays high:  loud, intense production 
+            "becomes a cross-genre norm.
+            """
         )
 
     c3, c4 = st.columns(2)
@@ -444,8 +533,10 @@ def render_feature_trend():
         ax.set_xlabel("Year")
         ax.grid(alpha=0.3)
         st.pyplot(fig)
-        st.caption(
-            "Loudness rises quickly in the early 2000s (the 'loudness wars') and then stabilizes at a high level."
+        st.markdown(
+            """
+            Loudness rises quickly in the early 2000s (the 'loudness wars') and then stabilizes at a high level.
+            """
         )
 
     # Valence
@@ -457,9 +548,11 @@ def render_feature_trend():
         ax.set_xlabel("Year")
         ax.grid(alpha=0.3)
         st.pyplot(fig)
-        st.caption(
-            "Valence trends downward – popular music remains energetic and loud but "
-            "becomes emotionally darker on average."
+        st.markdown(
+            """
+            Valence trends downward: popular music remains energetic and loud but
+            becomes emotionally darker on average.
+            """
         )
 
     st.subheader("Song Duration")
@@ -469,9 +562,10 @@ def render_feature_trend():
     ax.set_xlabel("Year")
     ax.grid(alpha=0.3)
     st.pyplot(fig)
-    st.caption(
-        "Average track length decreases over time, consistent with streaming logics that "
-        "reward quicker hooks, fewer skips, and more replays."
+    st.markdown(
+        """
+        Average track length decreases over time, consistent with streaming logics that reward quicker hooks, fewer skips, and more replays.
+        """
     )
 
     st.subheader("Key Takeaways:")
@@ -480,19 +574,24 @@ def render_feature_trend():
         - Overtime, songs have become more high-impact, built for immediate engagement.
         - Popular music in the streaming era is emotionally darker but sonically more aggressive.
         - Shorter songs have more replays, fewer skips, and higher playlist retention.
-        - Music adapts structurally to the platform economy, not just listener taste
+        - Music adapts structurally to the platform economy, not just listener taste.
         """
     )
 
 def render_conclusion():
-    st.subheader("Big Picture Takeaway")
+    st.header("Big Picture Takeaway")
+    st.image("images/world.jpg")
     st.markdown(
         """
-        Rather than revealing a simple sonic recipe, the regression supports a different story:
+        ***Spotify popularity isn’t driven primarily by sound alone***
+        - Some sonic features like Danceability, Energy, and Loudness show subtle relationships with Spotify popularity scores, but the linear regression results show that they explain only a small fraction of what makes a song successful. Even this influence has weakened over time from the 2000-2009 decade to 2010-2019. 
+        
+        ***Music hasn’t stayed static***
+        - The genre and feature trend analysis shows that popular songs have become more danceable, louder in volume, and higher energy. Artists are responding to the systematic shift with playlists, algorithmic recommendation systems, and shorter attention spans with the rise of short form media.
+        
+        ***Song popularity isn’t just a musical outcome but also a platform outcome***
+        - Sound still matters but exposure, recommendation systems, and digital culture and activity are extremely influential in shaping what becomes a hit. Therefore, there isn’t a sonic “formula” to make a hit song.
 
-        > Popularity in the streaming era is shaped more by **platform dynamics** – playlist
-        > placement, recommendation algorithms, label marketing, and social media virality –
-        > than by any fixed combination of audio features.
         """
     )
 
@@ -507,13 +606,13 @@ def render_conclusion():
 
         st.markdown(
             """
-            - Dataset covers **top-performing songs only** (2,000 tracks), not the full catalog.  
+            - Dataset covers only **top-performing songs and is limited to 2,000 tracks. 
             - Popularity is a **current Spotify metric**, not a historical chart measure.  
             - No data on playlist placement, label promotion, viral trends, or fanbase size,
             all of which clearly affect streams.  
             - Audio features describe the **sound** but not lyrics, visual media, cultural
             context, or nostalgia.  
-            - Genre labels are coarse and sometimes messy for hybrid tracks.
+            - Most songs are intersections of multiple genres. Therefore genre labelling grew messy at times for hybrid tracks.
             """
         )
 
@@ -544,11 +643,11 @@ def render_about():
     st.header("About This Project")
     st.markdown(
         """
-        This project analyzes Spotify audio features (2000–2019) to understand how the
+        This project analyzes Spotify audio features spanning the years 2000–2019 to understand how the
         **sound of popular music** has evolved during the streaming era. The dataset
-        includes 100k+ tracks with variables such as danceability, energy, valence,
-        tempo, loudness, and more. The goal is to explore how sonic characteristics
-        changed over time and how weakly (or strongly) they relate to **popularity**
+        includes 2,000+ tracks with variables such as danceability, energy, valence,
+        tempo, loudness, and more. The project explore how sonic characteristics
+        changed over time and how they relate to **popularity**
         in the streaming landscape.
         """
     )
@@ -576,7 +675,6 @@ def render_about():
         - Eriksson et al. — *Spotify Teardown: Inside the Black Box of Streaming Music* (MIT Press)  
         """
     )
-    st.markdown("---")
 
     st.header("Author")
     st.image("images/author.JPG", width=300)
@@ -588,8 +686,11 @@ def render_about():
         - LinkedIn: http://www.linkedin.com/in/HannahUm
         """
     )
+    st.markdown("---")
 
 # TAB NAVIGATION
+    
+st.title("""Sound in the Streaming Era: What Spotify Data Reveals About Music Popularity""")
 
 PAGES = {
     "Home": render_home,
