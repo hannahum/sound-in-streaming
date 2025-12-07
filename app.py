@@ -437,16 +437,18 @@ def render_genre_shift():
     top_genres = ["hip hop", "Dance/Electronic", "pop", "rock", "latin"]
     subset = year_genre[year_genre["primary_genre"].isin(top_genres)]
 
+    label_map = {
+        "danceability": "Danceability",
+        "energy": "Energy",
+        "valence": "Valence (Positivity)",
+        "loudness": "Loudness (dB)",
+        "duration_ms": "Duration (ms)",
+    }
+
     feature = st.selectbox(
         "Choose a feature to view by genre:",
-        ["danceability", "energy", "valence", "loudness", "duration_ms"],
-        format_func=lambda x: {
-            "danceability": "Danceability",
-            "energy": "Energy",
-            "valence": "Valence (Positivity)",
-            "loudness": "Loudness (dB)",
-            "duration_ms": "Duration (ms)",
-        }[x],
+        list(label_map.keys()),
+        format_func=lambda x: label_map[x],
     )
 
     fig, ax = plt.subplots(figsize=(8, 4))
@@ -459,13 +461,13 @@ def render_genre_shift():
         ax=ax,
     )
     ax.set_xlabel("Year")
-    ax.set_ylabel(feature)
+    ax.set_ylabel(label_map[feature])
     ax.grid(alpha=0.3)
     ax.legend(title="Genre")
     st.pyplot(fig)
 
-    st.markdown(
-        """
+    feature_explanations = {
+        "danceability": """
         - **Hip hop** becomes steadily more danceable and high-energy, reflecting the rise
           of trap, club-oriented rap, and social media dance trends.  
         - **Dance/Electronic** starts out as a trendsetter in danceability and energy;
@@ -475,8 +477,28 @@ def render_genre_shift():
         - **Rock** stays the least danceable but becomes more groove-aware in the 2010s.  
         - **Latin** shows a strong late-2010s push in danceability and energy, lining up
           with global reggaeton and bilingual pop crossover.
+        """,
+        "energy": """
+        - Energy stays high across almost all genres → intensity becomes the norm
+        - Dance/Electronic leads early, other genres catch up over time
+        - Hip hop and pop increase sharply in danceability after 2014
+        - Genres don’t stop being different, but they converge toward a shared rhythmic, high-energy sound
+        """,
+        "valence": """
+        Valence declines across every genre from 2000-2019
+        """,
+        "loudness": """
+        Loudness converges across genres
+        """,
+        "duration_ms": """
+        - Track length decreases across all genres
+        - Genres converge near ~3 minutes by the late 2010s
+        - Song length adapts to platform incentives rather than genre identity
+            - ex: replay value could matter more than song duration
         """
-    )
+    }
+
+    st.markdown(feature_explanations[feature])
 
 def render_feature_trend():
     st.header("Feature Trends over 2000–2019 (All Genres)")
